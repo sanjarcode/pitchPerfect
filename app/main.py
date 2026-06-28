@@ -73,12 +73,12 @@ def main():
     y2_swipe = int(y1_swipe * 0.75)
 
     # Load sample images for matching criteria (like/dislike)
-    like_images = [
-        cv2.imread(path) for path in ["images/like2.jpeg"] if os.path.exists(path)
-    ]
-    dislike_images = [
-        cv2.imread(path) for path in ["images/dislike.jpeg"] if os.path.exists(path)
-    ]
+    for path in ["images/like2.jpeg", "images/dislike.jpeg", "images/heart1.png"]:
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Required preference image missing: {path}")
+
+    like_images = [cv2.imread("images/like2.jpeg")]
+    dislike_images = [cv2.imread("images/dislike.jpeg")]
 
     open_hinge(device=device)
     time.sleep(5)
