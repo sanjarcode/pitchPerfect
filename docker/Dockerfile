@@ -19,8 +19,6 @@ COPY app/requirements.txt requirements.txt
 
 COPY .env .env
 
-# Install compatible numpy and other dependencies from requirements.txt
-RUN pip install --no-cache-dir numpy==1.21.6
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ /app/
