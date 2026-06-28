@@ -3,6 +3,7 @@
 import openai
 import random
 from config import OPENAI_API_KEY
+from text_analyzer import clean_text, extract_keywords, analyze_sentiment
 
 openai.api_key = OPENAI_API_KEY
 
@@ -88,7 +89,7 @@ def generate_prompt(style_template: str, keywords: list, sentiment: str) -> str:
     return system_prompt
 
 
-def call_gpt4(prompt: str, temperature: float = 0.7, max_tokens: int = 150) -> str:
+def call_gpt4(prompt: str, temperature: float = 0.7, max_tokens: int = 60) -> str:
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[
@@ -108,8 +109,6 @@ def generate_comment(profile_text: str) -> str:
     3. Call GPT-4
     Return the final comment string.
     """
-    from text_analyzer import clean_text, extract_keywords, analyze_sentiment
-
     cleaned = clean_text(profile_text)
     keywords = extract_keywords(cleaned)
     sentiment = analyze_sentiment(cleaned)

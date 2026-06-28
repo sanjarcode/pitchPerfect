@@ -226,7 +226,7 @@ def generate_comment(profile_text):
             },
             {"role": "user", "content": prompt},
         ],
-        max_tokens=1500,
+        max_tokens=60,
         temperature=0.7,
     )
 

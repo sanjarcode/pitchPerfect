@@ -1,7 +1,7 @@
 # docker/Dockerfile
 FROM python:3.9-slim
 
-# Install system dependencies for OCR, spaCy, etc.
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
     libffi-dev \
@@ -9,17 +9,8 @@ RUN apt-get update && apt-get install -y \
     wget \
     tesseract-ocr \
     libtesseract-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Add apt-get instructions to install libGL
-RUN apt-get update && \
-    apt-get install -y libgl1 && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install ADB into container
-RUN apt-get update && apt-get install -y \
+    libgl1 \
     adb \
-    # plus any other dependencies
     && rm -rf /var/lib/apt/lists/*
 
 # Make work directoy
