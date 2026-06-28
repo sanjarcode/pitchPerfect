@@ -10,7 +10,12 @@ Replace screenshot-based UI interaction with `uiautomator2` to get structured UI
 
 This eliminates the current CV stack for UI interaction entirely.
 
-## 2. Physical Preference Filtering
+## 2. Restore Preference Gate (short-circuited)
+
+The like/dislike decision in `main.py` is currently hardcoded to always like (`if True`).
+Restore a real preference gate using one of the approaches below before going to production.
+
+## 3. Physical Preference Filtering
 
 Add physical attribute filtering (fitness, age, etc.) using GPT-4 Vision on profile photos.
 

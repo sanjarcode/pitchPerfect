@@ -72,13 +72,9 @@ def main():
     y1_swipe = int(height * 0.5)
     y2_swipe = int(y1_swipe * 0.75)
 
-    # Load sample images for matching criteria (like/dislike)
-    for path in ["images/like2.jpeg", "images/dislike.jpeg", "images/heart1.png"]:
-        if not os.path.exists(path):
-            raise FileNotFoundError(f"Required preference image missing: {path}")
-
-    like_images = [cv2.imread("images/like2.jpeg")]
-    dislike_images = [cv2.imread("images/dislike.jpeg")]
+    # TODO: preference gate is short-circuited to always like — see TODO.md
+    like_images = []
+    dislike_images = []
 
     open_hinge(device=device)
     time.sleep(5)
@@ -107,22 +103,11 @@ def main():
 
         print("Calculated scores => Like:", match_like, "Dislike:", match_dislike)
 
-        # Find the Like button
-        x_select_like_button, y_select_like_button = find_icon(
-            "images/screen.png",
-            "images/heart1.png",
-            threshold=0.75,
-            min_matches=10,
-            approx_x=x_select_like_button_approx,
-            approx_y=y_select_like_button_approx,
-        )
+        # TODO: replace with real preference gate (see TODO.md)
+        x_select_like_button = x_select_like_button_approx
+        y_select_like_button = y_select_like_button_approx
 
-        # Decision-making logic
-        if (
-            match_like * 0 < match_dislike
-            and x_select_like_button is not None
-            and y_select_like_button is not None
-        ):
+        if True:
             # Generate a comment using your advanced logic or the existing generate_comment
             # For demonstration, let's assume your 'generate_comment' calls GPT-4, etc.
             comment = (
