@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 
 # Add apt-get instructions to install libGL
 RUN apt-get update && \
-    apt-get install -y libgl1-mesa-glx && \
+    apt-get install -y libgl1 && \
     rm -rf /var/lib/apt/lists/*
 
 # Install ADB into container
