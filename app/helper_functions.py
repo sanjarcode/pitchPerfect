@@ -237,9 +237,12 @@ def generate_comment(profile_text):
 def get_screen_resolution(device):
     output = device.shell("wm size")
     print("screen size: ", output)
-    resolution = output.strip().split(":")[1].strip()
-    width, height = map(int, resolution.split("x"))
-    return width, height
+    for line in reversed(output.strip().splitlines()):
+        if ":" in line:
+            resolution = line.split(":")[1].strip()
+            width, height = map(int, resolution.split("x"))
+            return width, height
+    raise ValueError(f"Could not parse screen resolution from: {output}")
 
 
 def open_hinge(device):

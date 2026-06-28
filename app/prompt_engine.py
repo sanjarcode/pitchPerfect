@@ -99,6 +99,8 @@ def call_gpt4(prompt: str, temperature: float = 0.7, max_tokens: int = 60) -> st
         max_tokens=max_tokens,
         temperature=temperature,
     )
+    usage = response.get("usage", {})
+    print(f"Tokens used — prompt: {usage.get('prompt_tokens')}, completion: {usage.get('completion_tokens')}, total: {usage.get('total_tokens')}")
     return response.choices[0].message["content"].strip()
 
 

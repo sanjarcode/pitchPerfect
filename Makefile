@@ -2,8 +2,8 @@ IMAGE_NAME    = my-ocr-bot
 DOCKERFILE    = ./docker/Dockerfile
 DOCKERHUB_IMG = sanjarcode/my-ocr-bot
 
-# Extract IP from the first connected ADB device (works for both USB and TCP/IP)
-DEVICE_IP   = $(shell adb devices | grep -v "List of devices" | awk '/device$$/{print $$1}' | head -1 | cut -d: -f1)
+# Get the WiFi IP directly from the device (works for USB, TCP/IP, and mDNS connections)
+DEVICE_IP   = $(shell adb shell ip route | grep wlan | awk '{print $$9}' | head -1)
 
 .DEFAULT_GOAL := help
 
